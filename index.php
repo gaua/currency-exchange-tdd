@@ -3,7 +3,7 @@
 require_once 'vendor/autoload.php';
 
 $exchangeRepository = new \Gaua\ExchangeRatesRepository(new \GuzzleHttp\Client());
-$currencyExchanger = new \Gaua\CurrencyExchanger($exchangeRepository, new \Gaua\DateProvider());
+$currencyExchanger = new \Gaua\CurrencyExchanger($exchangeRepository, new \Gaua\Rounder(), new \Gaua\DateProvider());
 
 $amount = $currencyExchanger->exchange(
     new \Gaua\Money(100, new \Gaua\CurrencyCode('EUR')),

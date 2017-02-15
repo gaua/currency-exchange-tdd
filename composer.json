@@ -1,0 +1,20 @@
+{
+    "name": "gaua/exchange",
+    "authors": [
+        {
+            "name": "gaua",
+            "email": "k.gala88@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "phpunit/phpunit": "5.*",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gaua\\": "src/",
+            "Test\\": "test/"
+        }
+    }
+}

@@ -21,9 +21,6 @@ class CurrencyExchangerTest extends \PHPUnit_Framework_TestCase
     /** @var DateProvider | \PHPUnit_Framework_MockObject_MockObject*/
     private $dateProviderMock;
 
-    /** @var Rounder | \PHPUnit_Framework_MockObject_MockObject*/
-    private $rounderMock;
-
     public function setUp()
     {
         $dateProviderMock = $this->getMockBuilder(DateProvider::class)->getMock();
@@ -47,11 +44,10 @@ class CurrencyExchangerTest extends \PHPUnit_Framework_TestCase
 
     public function testExchangeRoundsDown()
     {
-        $this->prepareRounderMockForRoundsDownTest();
 
         $currencyExchanger = new CurrencyExchanger(
             $this->rateRepositoryMock,
-            $this->rounderMock,
+            new Rounder(),
             $this->dateProviderMock
         );
 
@@ -61,16 +57,14 @@ class CurrencyExchangerTest extends \PHPUnit_Framework_TestCase
             CurrencyExchanger::ROUND_DOWN
         );
 
-        $this->assertInternalType('float', $amount);
+        $this->assertSame(1.51, $amount);
     }
 
     public function testExchangeRoundUp()
     {
-        $this->prepareRounderMockForRoundsUpTest();
-
         $currencyExchanger = new CurrencyExchanger(
             $this->rateRepositoryMock,
-            $this->rounderMock,
+            new Rounder(),
             $this->dateProviderMock
         );
 
@@ -79,32 +73,7 @@ class CurrencyExchangerTest extends \PHPUnit_Framework_TestCase
             new CurrencyCode(self::TO_CURRENCY)
         );
 
-        $this->assertInternalType('float', $amount);
+        $this->assertSame(1.52, $amount);
     }
 
-    private function prepareRounderMockForRoundsDownTest()
-    {
-        $rounderMock = $this->getMockBuilder(Rounder::class)->getMock();
-
-        $rounderMock->expects($this->once())
-            ->method('down')
-            ->willReturn(1.23);
-        $rounderMock->expects($this->never())
-            ->method('up');
-
-        $this->rounderMock = $rounderMock;
-    }
-
-    private function prepareRounderMockForRoundsUpTest()
-    {
-        $rounderMock = $this->getMockBuilder(Rounder::class)->getMock();
-
-        $rounderMock->expects($this->once())
-            ->method('up')
-            ->willReturn(1.23);
-        $rounderMock->expects($this->never())
-            ->method('down');
-
-        $this->rounderMock = $rounderMock;
-    }
 }

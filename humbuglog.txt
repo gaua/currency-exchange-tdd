@@ -1,0 +1,30 @@
+Humbug running test suite to generate logs and code coverage data...
+Humbug has completed the initial test run successfully.
+Tests: 15 Line Coverage: 96.55%
+Humbug is analysing source files...
+Mutation Testing is commencing on 6 files...
+(.: killed, M: escaped, S: uncovered, E: fatal error, T: timed out)
+..............S...
+18 mutations were generated:
+      17 mutants were killed
+       1 mutants were not covered by tests
+       0 covered mutants were not detected
+       0 fatal errors were encountered
+       0 time outs were encountered
+
+Metrics:
+    Mutation Score Indicator (MSI): 94%
+    Mutation Code Coverage: 94%
+    Covered Code MSI: 100%
+
+Remember that some mutants will inevitably be harmless (i.e. false positives).
+Time: 4.76 seconds Memory: 4.00MB
+Humbug results are being logged as TEXT to: humbuglog.txt
+
+------
+Uncovered
+------
+
+
+1) Mutator \Humbug\Mutator\ReturnValue\FunctionCall on \Gaua\DateProvider::getCurrentDate() in /home/kgala/Workspace/sources/currency-exchange-tdd/src/DateProvider.php on line 10
+
